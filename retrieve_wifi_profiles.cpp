@@ -3,18 +3,11 @@
 #include <string>
 #include <vector>
 
-/*typedef struct _GUID {
-	DWORD Data1;
-	WORD Data2;
-	WORD Data3;
-	BYTE Data4[8];
-} GUID;*/
-
+// Structs
 typedef struct _WLAN_INTERFACE_INFO {
 	GUID InterfaceGuid;
 	WCHAR strInterfaceDescription[256];
 	DWORD isState;
-	//DWORD isState;
 } WLAN_INTERFACE_INFO, *PWLAN_INTERFACE_INFO;
 
 typedef struct _WLAN_INTERFACE_INFO_LIST {
@@ -34,6 +27,7 @@ typedef struct _WLAN_PROFILE_INFO_LIST {
 	WLAN_PROFILE_INFO ProfileInfo[256];
 } WLAN_PROFILE_INFO_LIST, *PWLAN_PROFILE_INFO_LIST;
 
+// Functions
 typedef DWORD (WINAPI *f_WlanOpenHandle)(DWORD, LPVOID, LPDWORD, PHANDLE);
 typedef DWORD (WINAPI *f_WlanEnumInterfaces)(HANDLE, LPVOID, LPVOID);
 typedef DWORD (WINAPI *f_WlanGetProfile)(HANDLE, GUID*, LPCWSTR, PVOID, LPWSTR*, DWORD*, DWORD*);
@@ -91,6 +85,5 @@ int main(int argc, LPCSTR argv[]) {
 
     FreeLibrary(hWlanApi);
     WlanCloseHandle(hClientHandle, NULL);
-
-	return 0;
+    return 0;
 }
